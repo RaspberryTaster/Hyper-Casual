@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://bos46oemma7ss"]
+
+[ext_resource type="PackedScene" uid="uid://dnnmn2b7frbsx" path="res://Background/Background.tscn" id="1_npmbg"]
+[ext_resource type="Script" path="res://Game/Game_Manager.gd" id="1_vhx05"]
+[ext_resource type="PackedScene" uid="uid://cvbxvlxrj1vqm" path="res://Player/player.tscn" id="2_cslnh"]
+[ext_resource type="PackedScene" uid="uid://nghha6o4521i" path="res://Interface/game_ui.tscn" id="3_v4m38"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0pvk"]
+size = Vector2(67, 929)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1okct"]
+size = Vector2(498, 63)
+
+[node name="Game_World" type="Node"]
+script = ExtResource("1_vhx05")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_npmbg")]
+
+[node name="Player" parent="." instance=ExtResource("2_cslnh")]
+position = Vector2(203, 785)
+
+[node name="Left Collider" type="StaticBody2D" parent="."]
+position = Vector2(-11, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Collider"]
+position = Vector2(-28.5, 451.5)
+shape = SubResource("RectangleShape2D_i0pvk")
+
+[node name="Right Collider" type="StaticBody2D" parent="."]
+position = Vector2(6, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Collider"]
+position = Vector2(512.5, 451.5)
+shape = SubResource("RectangleShape2D_i0pvk")
+
+[node name="Top Collider" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top Collider"]
+position = Vector2(239, -39.5)
+shape = SubResource("RectangleShape2D_1okct")
+
+[node name="Bottom Collider" type="StaticBody2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom Collider"]
+position = Vector2(239, 884.5)
+shape = SubResource("RectangleShape2D_1okct")
+
+[node name="Game UI" parent="." instance=ExtResource("3_v4m38")]
+visible = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Wall grabbing = false"
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+offset_top = 23.0
+offset_right = 161.0
+offset_bottom = 49.0
+text = "Previous Wall = \"None\""
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 1.0
+offset_top = 46.0
+offset_right = 179.0
+offset_bottom = 72.0
+text = "Score = 20"
+
+[node name="Difficulty Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Difficulty Timer" to="." method="_on_difficulty_timer_timeout"]

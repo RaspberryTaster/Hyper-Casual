@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnnmn2b7frbsx"]
+
+[ext_resource type="Shader" path="res://Background/Background.gdshader" id="1_gs4jv"]
+[ext_resource type="Texture2D" uid="uid://bj2kb48475mb" path="res://Pixel Adventure/Background/Green.png" id="2_0thdg"]
+[ext_resource type="Script" path="res://Background/Background.gd" id="3_5lgyi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4ncw"]
+resource_local_to_scene = true
+shader = ExtResource("1_gs4jv")
+shader_parameter/tileFactor = Vector2(10, 10)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/direction = Vector2(0, 1)
+shader_parameter/speed = 1.0
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_t4ncw")
+position = Vector2(245, 430)
+scale = Vector2(14, 14)
+texture = ExtResource("2_0thdg")
+script = ExtResource("3_5lgyi")
+
+[connection signal="item_rect_changed" from="ParallaxLayer/Sprite2D" to="ParallaxLayer/Sprite2D" method="_on_item_rect_changed"]

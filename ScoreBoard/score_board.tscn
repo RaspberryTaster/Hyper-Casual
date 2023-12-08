@@ -1,0 +1,159 @@
+[gd_scene load_steps=8 format=3 uid="uid://domgx4jehl8q1"]
+
+[ext_resource type="Script" path="res://Score_Board.gd" id="1_s0ufg"]
+[ext_resource type="Texture2D" uid="uid://cegmobofqllr1" path="res://Pixel Adventure/Menu/Menu Label.png" id="3_h30ik"]
+[ext_resource type="PackedScene" uid="uid://8mgrhypsvcom" path="res://ScoreBoard/score_line.tscn" id="3_q4uw6"]
+[ext_resource type="FontFile" uid="uid://c2wanvx1fj75t" path="res://Fonts/Gorgeous Pixel.ttf" id="3_ypc2r"]
+
+[sub_resource type="Animation" id="Animation_hk10f"]
+resource_name = "Pressed"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.203922, 0.203922, 0.203922, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7dkhd"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_asncg"]
+_data = {
+"Pressed": SubResource("Animation_hk10f"),
+"RESET": SubResource("Animation_7dkhd")
+}
+
+[node name="Score_Board" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s0ufg")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -232.0
+offset_top = -264.0
+offset_right = 232.0
+offset_bottom = -169.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_ypc2r")
+theme_override_font_sizes/font_size = 80
+text = "Score Board
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -31.0
+offset_right = 144.0
+offset_bottom = 265.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLine" parent="VBoxContainer" instance=ExtResource("3_q4uw6")]
+layout_mode = 2
+
+[node name="Back_Button" type="TextureButton" parent="."]
+self_modulate = Color(1, 0.8, 0.313726, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_top = -72.0
+offset_right = 104.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(104, 36)
+texture_normal = ExtResource("3_h30ik")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Back_Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -22.0
+offset_right = 33.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_ypc2r")
+theme_override_font_sizes/font_size = 35
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Back_Button"]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_asncg")
+}
+
+[connection signal="button_down" from="Back_Button" to="." method="_on_back_button_button_down"]
+[connection signal="button_up" from="Back_Button" to="." method="_on_back_button_button_up"]

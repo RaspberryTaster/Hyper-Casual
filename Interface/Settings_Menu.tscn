@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://bc1ydufmeixm3"]
+
+[ext_resource type="PackedScene" uid="uid://dnnmn2b7frbsx" path="res://Background/Background.tscn" id="1_ojgif"]
+[ext_resource type="Shader" path="res://Background/Background.gdshader" id="2_v8c58"]
+[ext_resource type="Texture2D" uid="uid://bf5ebnk3ey4ma" path="res://Pixel Adventure/Background/Pink.png" id="3_pojc1"]
+[ext_resource type="PackedScene" uid="uid://8r0iffcwcwcc" path="res://Interface/setting_ui.tscn" id="4_a5abt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bwfb"]
+resource_local_to_scene = true
+shader = ExtResource("2_v8c58")
+shader_parameter/tileFactor = Vector2(8, 8)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/speed = 0.2
+
+[node name="Background" instance=ExtResource("1_ojgif")]
+
+[node name="Sprite2D" parent="ParallaxLayer" index="0"]
+material = SubResource("ShaderMaterial_1bwfb")
+texture = ExtResource("3_pojc1")
+
+[node name="Setting_UI" parent="." index="1" instance=ExtResource("4_a5abt")]

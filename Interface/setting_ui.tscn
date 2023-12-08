@@ -1,0 +1,218 @@
+[gd_scene load_steps=7 format=3 uid="uid://8r0iffcwcwcc"]
+
+[ext_resource type="Script" path="res://Interface/setting_ui.gd" id="1_1r44w"]
+[ext_resource type="FontFile" uid="uid://c2wanvx1fj75t" path="res://Fonts/Gorgeous Pixel.ttf" id="2_yeq1k"]
+[ext_resource type="Texture2D" uid="uid://cegmobofqllr1" path="res://Pixel Adventure/Menu/Menu Label.png" id="3_u7p0o"]
+
+[sub_resource type="Animation" id="Animation_hk10f"]
+resource_name = "Pressed"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.203922, 0.203922, 0.203922, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7dkhd"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_asncg"]
+_data = {
+"Pressed": SubResource("Animation_hk10f"),
+"RESET": SubResource("Animation_7dkhd")
+}
+
+[node name="Setting_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1r44w")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+self_modulate = Color(0, 0.882353, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -36.0
+offset_right = 104.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(104, 36)
+texture_normal = ExtResource("3_u7p0o")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_yeq1k")
+theme_override_font_sizes/font_size = 35
+text = "Retry
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+self_modulate = Color(1, 0.8, 0.313726, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = 37.0
+offset_right = 104.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(104, 36)
+texture_normal = ExtResource("3_u7p0o")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="TextureButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -22.0
+offset_right = 33.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_yeq1k")
+theme_override_font_sizes/font_size = 35
+text = "Menu
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton3" type="TextureButton" parent="."]
+self_modulate = Color(1, 0.298039, 0.509804, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = 109.0
+offset_right = 104.0
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(104, 36)
+texture_normal = ExtResource("3_u7p0o")
+stretch_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureButton3"]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_asncg")
+}
+
+[node name="Label" type="Label" parent="TextureButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_yeq1k")
+theme_override_font_sizes/font_size = 35
+text = "Quit
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -201.0
+offset_right = 44.5
+offset_bottom = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_yeq1k")
+theme_override_font_sizes/font_size = 80
+text = "Settings
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="TextureButton3" to="." method="_on_texture_button_3_button_down"]
+[connection signal="button_up" from="TextureButton3" to="." method="_on_texture_button_3_button_up"]

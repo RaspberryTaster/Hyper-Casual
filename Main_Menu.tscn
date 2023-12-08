@@ -1,0 +1,293 @@
+[gd_scene load_steps=12 format=3 uid="uid://k08ev5660kaw"]
+
+[ext_resource type="PackedScene" uid="uid://cl22bsr1p27p6" path="res://Background/Main_Menu.tscn" id="1_sspck"]
+[ext_resource type="Texture2D" uid="uid://cegmobofqllr1" path="res://Pixel Adventure/Menu/Menu Label.png" id="2_txmbj"]
+[ext_resource type="FontFile" uid="uid://c2wanvx1fj75t" path="res://Fonts/Gorgeous Pixel.ttf" id="3_lvctf"]
+[ext_resource type="PackedScene" uid="uid://domgx4jehl8q1" path="res://ScoreBoard/score_board.tscn" id="4_0lsd3"]
+[ext_resource type="AudioStream" uid="uid://dky7gc7jdudla" path="res://Audio/kenney_ui-audio/Audio/click4.ogg" id="5_ibhnp"]
+
+[sub_resource type="Animation" id="Animation_hk10f"]
+resource_name = "Pressed"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.203922, 0.203922, 0.203922, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7dkhd"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_asncg"]
+_data = {
+"Pressed": SubResource("Animation_hk10f"),
+"RESET": SubResource("Animation_7dkhd")
+}
+
+[sub_resource type="Animation" id="Animation_ggfa3"]
+resource_name = "Main->Score_Board"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-480, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6w4yc"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0b13x"]
+_data = {
+"Main->Score_Board": SubResource("Animation_ggfa3"),
+"RESET": SubResource("Animation_6w4yc")
+}
+
+[node name="Main_Menu" type="Node"]
+
+[node name="Background" parent="." instance=ExtResource("1_sspck")]
+
+[node name="Setting_UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 853.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton" type="TextureButton" parent="Setting_UI"]
+self_modulate = Color(0, 0.882353, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = 201.5
+offset_right = 104.0
+offset_bottom = 273.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(104, 36)
+texture_normal = ExtResource("2_txmbj")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Setting_UI/TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_lvctf")
+theme_override_font_sizes/font_size = 35
+text = "play
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Setting_UI/TextureButton"]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_asncg")
+}
+
+[node name="TextureButton2" type="TextureButton" parent="Setting_UI"]
+self_modulate = Color(0.341176, 0.592157, 1, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = 270.5
+offset_right = 104.0
+offset_bottom = 342.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(104, 36)
+texture_normal = ExtResource("2_txmbj")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Setting_UI/TextureButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = -23.5
+offset_right = 86.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_lvctf")
+theme_override_font_sizes/font_size = 30
+text = "SCORE BOARD
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Setting_UI/TextureButton2"]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_asncg")
+}
+
+[node name="TextureButton3" type="TextureButton" parent="Setting_UI"]
+self_modulate = Color(1, 0.298039, 0.509804, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = 342.5
+offset_right = 104.0
+offset_bottom = 414.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(104, 36)
+texture_normal = ExtResource("2_txmbj")
+stretch_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Setting_UI/TextureButton3"]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_asncg")
+}
+
+[node name="Label" type="Label" parent="Setting_UI/TextureButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_lvctf")
+theme_override_font_sizes/font_size = 35
+text = "Quit
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Label" type="Label" parent="Setting_UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -201.0
+offset_right = 44.5
+offset_bottom = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_lvctf")
+theme_override_font_sizes/font_size = 80
+text = "Ninja Frog
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Score_Board" parent="Setting_UI" instance=ExtResource("4_0lsd3")]
+layout_mode = 1
+offset_left = 480.0
+offset_right = 480.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Setting_UI"]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_0b13x")
+}
+
+[node name="Button_Audio" type="AudioStreamPlayer2D" parent="Setting_UI"]
+stream = ExtResource("5_ibhnp")
+
+[connection signal="button_down" from="Setting_UI/TextureButton" to="Background" method="_on_texture_button_button_down"]
+[connection signal="button_up" from="Setting_UI/TextureButton" to="Background" method="_on_texture_button_button_up"]
+[connection signal="button_down" from="Setting_UI/TextureButton2" to="Background" method="_on_texture_button_2_button_down"]
+[connection signal="button_up" from="Setting_UI/TextureButton2" to="Background" method="_on_texture_button_2_button_up"]
+[connection signal="button_down" from="Setting_UI/TextureButton3" to="Background" method="_on_texture_button_3_button_down"]
+[connection signal="button_up" from="Setting_UI/TextureButton3" to="Background" method="_on_texture_button_3_button_up"]

@@ -1,0 +1,149 @@
+[gd_scene load_steps=6 format=3 uid="uid://v1x8p7iptc75"]
+
+[ext_resource type="FontFile" uid="uid://c2wanvx1fj75t" path="res://Fonts/Gorgeous Pixel.ttf" id="1_gfpsu"]
+[ext_resource type="Texture2D" uid="uid://cegmobofqllr1" path="res://Pixel Adventure/Menu/Menu Label.png" id="2_jv716"]
+
+[sub_resource type="Animation" id="Animation_hk10f"]
+resource_name = "Pressed"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.203922, 0.203922, 0.203922, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7dkhd"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_asncg"]
+_data = {
+"Pressed": SubResource("Animation_hk10f"),
+"RESET": SubResource("Animation_7dkhd")
+}
+
+[node name="Score Input" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.5
+offset_top = -117.0
+offset_right = 113.5
+offset_bottom = 121.67
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score_Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gfpsu")
+theme_override_font_sizes/font_size = 40
+text = "Final Score:
+250
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Name_Input" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Your name"
+
+[node name="Submit" type="TextureButton" parent="."]
+self_modulate = Color(0, 0.882353, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = 31.0
+offset_right = 104.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(104, 36)
+texture_normal = ExtResource("2_jv716")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Submit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_gfpsu")
+theme_override_font_sizes/font_size = 27
+text = "Submit Score
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Submit"]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_asncg")
+}
